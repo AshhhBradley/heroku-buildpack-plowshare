@@ -103,11 +103,14 @@ mv list.sh plowlist
 cd ..
 chmod -R +x plowshare/
 
-for dir in plowshare/*
-do
-	PROFILE_PATH="$BUILD_DIR/.profile.d/${dir#*/}.sh"
-	echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
-done
+PROFILE_PATH="$BUILD_DIR/.profile.d/plowshare_new.sh"
+echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
+
+# for dir in plowshare/*
+# do
+# 	PROFILE_PATH="$BUILD_DIR/.profile.d/${dir#*/}.sh"
+# 	echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
+# done
 
 
 # cd $BUILD_DIR/vendor/plowshare-2.1.7

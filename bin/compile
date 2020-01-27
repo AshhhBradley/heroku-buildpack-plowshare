@@ -90,13 +90,17 @@ wget -O /tmp/plowshare-2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archiv
 echo "-----> Installing Plowshare"
 tar xvzf /tmp/plowshare-2.1.7.tar.gz -C $BUILD_DIR/vendor/
 cd $BUILD_DIR/vendor
-mkdir plowshare plowshare/plowmod plowshare/plowup plowshare/plowdown plowshare/plowdel plowshare/plowprobe plowshare/plowlist
-cp plowshare-2.1.7/src/core.sh plowshare
-cp plowshare-2.1.7/src/mod.sh plowshare/plowmod
-cp plowshare-2.1.7/src/upload.sh plowshare/plowup
-cp plowshare-2.1.7/src/download.sh plowshare/plowdown
-cp plowshare-2.1.7/src/probe.sh plowshare/plowprobe
-cp plowshare-2.1.7/src/list.sh plowshare/plowlist
+mkdir plowshare
+cp -R plowshare-2.1.7/src/. plowshare/
+cd plowshare
+# mkdir plowshare plowshare/plowmod plowshare/plowup plowshare/plowdown plowshare/plowdel plowshare/plowprobe plowshare/plowlist
+# cp plowshare-2.1.7/src/core.sh plowshare
+mv mod.sh plowmod
+mv upload.sh plowup
+mv download.sh plowdown
+mv probe.sh plowprobe
+mv list.sh plowlist
+cd ..
 chmod -R +x plowshare/
 
 for dir in plowshare/*

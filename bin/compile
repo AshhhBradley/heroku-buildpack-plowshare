@@ -89,28 +89,21 @@ echo "-----> Downloading Plowshare"
 wget -O /tmp/plowshare-2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
 echo "-----> Installing Plowshare"
 tar xvzf /tmp/plowshare-2.1.7.tar.gz -C $BUILD_DIR/vendor/
-cd $BUILD_DIR/vendor
 mkdir plowshare
-cp -R plowshare-2.1.7/src/. plowshare/
-cd plowshare
-# mkdir plowshare plowshare/plowmod plowshare/plowup plowshare/plowdown plowshare/plowdel plowshare/plowprobe plowshare/plowlist
-# cp plowshare-2.1.7/src/core.sh plowshare
-mv mod.sh plowmod
-mv upload.sh plowup
-mv download.sh plowdown
-mv probe.sh plowprobe
-mv list.sh plowlist
-cd ..
+cp -R plowshare-2.1.7/src/*.sh plowshare/
+mv plowshare/mod.sh plowshare/plowmod
+mv plowshare/upload.sh plowshare/plowup
+mv plowshare/download.sh plowshare/plowdown
+mv plowshare/delete.sh plowshare/plowdel
+mv plowshare/probe.sh plowshare/plowprobe
+mv plowshare/list.sh plowshare/plowlist
 chmod -R +x plowshare/
 
-PROFILE_PATH="$BUILD_DIR/.profile.d/plowshare_new.sh"
-echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
-
-# for dir in plowshare/*
-# do
-# 	PROFILE_PATH="$BUILD_DIR/.profile.d/${dir#*/}.sh"
-# 	echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
-# done
+for file in plowshare/*
+do
+	PROFILE_PATH="$BUILD_DIR/.profile.d/${file#*/}.sh"
+	echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
+done
 
 
 # cd $BUILD_DIR/vendor/plowshare-2.1.7

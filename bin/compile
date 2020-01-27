@@ -90,6 +90,7 @@ wget -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archi
 echo "-----> Installing Plowshare"
 tar xvzf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/
 cd $BUILD_DIR/vendor/plowshare-2.1.7
+PLOWSHARE_FORCE_VERSION="2.1.7"
 make install PREFIX=\$HOME
 PROFILE_PATH="$BUILD_DIR/.profile.d/plowshare.sh"
 mkdir -p "$(dirname "$PROFILE_PATH")"

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "-----> Installing heroku buildpack plowshare by Hasibul Kobir"
+echo "-----> Installing Plowshare"
 BUILD_DIR=$1
 VENDOR="$BUILD_DIR/vendor"
 mkdir -p $VENDOR
@@ -62,4 +62,3 @@ bash plowmod --install
 
 
 echo "-----> Done"
-echo "       Thanks for using this buildpack. [ Hasibul ]"

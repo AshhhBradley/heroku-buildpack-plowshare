@@ -69,6 +69,7 @@ wget -P /tmp http://ftp.mozilla.org/pub/spidermonkey/prereleases/59/pre1/mozjs-5
 echo "-----> Extracting mozjs"
 tar xf /tmp/mozjs-59.0a1.0.tar.bz2 -C $BUILD_DIR
 echo "-----> Done"
+ls -l $BUILD_DIR
 cd $BUILD_DIR/mozjs-59.0a1.0.tar.bz2
 
 wget -O bootstrap.py https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py && python bootstrap.py

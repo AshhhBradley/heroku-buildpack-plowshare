@@ -79,8 +79,9 @@ echo "-----> Downloading Plowshare"
 wget -P /tmp -O plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
 echo "-----> Installing Plowshare"
 mkdir $BUILD_DIR/vendor/plowshare
-tar -xvzf plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/plowshare
-cd "$BUILD_DIR/vendor/plowshare"
+tar xJf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/plowshare
+cd $BUILD_DIR/vendor/plowshare
+ls -l
 make install PREFIX=\$HOME
 echo "-----> Done"
 

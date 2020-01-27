@@ -76,7 +76,7 @@ echo "-----> Done"
 
 echo "-----> Downloading Plowshare"
 # https://github.com/mcrapet/plowshare/releases
-wget -P /tmp -O plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
+wget -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
 echo "-----> Installing Plowshare"
 mkdir $BUILD_DIR/vendor/plowshare
 tar xJf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/plowshare

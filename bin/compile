@@ -60,40 +60,53 @@ echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
 
 # bash plowmod --install
 
+DOWNLOAD_URL="https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz"
+wget -P /tmp $DOWNLOAD_URL
+echo "-----> Extracting Node.js"
+mkdir $VENDOR/nodejs
+tar xJvf /tmp/node-v12.14.1-linux-x64.tar.xz -C $VENDOR/nodejs
+ls -l $VENDOR
+# cd $VENDOR/nodejs
+
+echo "-----> exporting PATH"
+PROFILE_PATH="$BUILD_DIR/.profile.d/nodejs.sh"
+mkdir -p "$(dirname "$PROFILE_PATH")"
+echo 'export PATH="$PATH:${HOME}/vendor/nodejs/node-v12.14.1-linux-x64/bin"' >> $PROFILE_PATH
+
 # wget http://ftp.mozilla.org/pub/spidermonkey/prereleases/59/pre1/mozjs-59.0a1.0.tar.bz2
 # tar xvf mozjs-59.0a1.0.tar.bz2
 # cd mozjs-59.0a1.0.tar.bz2
 
 # BUILD_DIR=$1
 # VENDOR="$BUILD_DIR/vendor"
-cd ~
-wget -P /tmp http://ftp.mozilla.org/pub/spidermonkey/prereleases/59/pre1/mozjs-59.0a1.0.tar.bz2
-echo "-----> Extracting mozjs"
-tar xf /tmp/mozjs-59.0a1.0.tar.bz2 -C $VENDOR
-echo "-----> Done"
-ls -l $VENDOR
-cd $VENDOR/mozjs-59.0a1.0
+# cd ~
+# wget -P /tmp http://ftp.mozilla.org/pub/spidermonkey/prereleases/59/pre1/mozjs-59.0a1.0.tar.bz2
+# echo "-----> Extracting mozjs"
+# tar xf /tmp/mozjs-59.0a1.0.tar.bz2 -C $VENDOR
+# echo "-----> Done"
+# ls -l $VENDOR
+# cd $VENDOR/mozjs-59.0a1.0
 
-wget -O bootstrap.py https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py && python bootstrap.py
-wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
-tar -xvzf autoconf-2.13.tar.gz
-cd autoconf-2.13/
-./configure --program-suffix=2.13
-make
-make install
-cd ..
+# wget -O bootstrap.py https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py && python bootstrap.py
+# wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
+# tar -xvzf /tmp/autoconf-2.13.tar.gz
+# cd autoconf-2.13/
+# ./configure --program-suffix=2.13
+# make
+# make install
+# cd ..
 
-cd js/src
-# If it doesn't work, use autoconf2.13
-autoconf-2.13
+# cd js/src
+# # If it doesn't work, use autoconf2.13
+# autoconf-2.13
 
-mkdir build_DBG.OBJ
-cd build_DBG.OBJ
+# mkdir build_DBG.OBJ
+# cd build_DBG.OBJ
 
-CFLAGS='-pg' CXXFLAGS='-pg' ../configure --enable-debug --disable-optimize
-make
+# CFLAGS='-pg' CXXFLAGS='-pg' ../configure --enable-debug --disable-optimize
+# make
 
-cd js/src/shell/
-./js -e 'print("Test JS Interpreter")'
+# cd js/src/shell/
+# ./js -e 'print("Test JS Interpreter")'
 
 echo "-----> Done"

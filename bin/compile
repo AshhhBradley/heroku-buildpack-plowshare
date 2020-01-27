@@ -86,15 +86,15 @@ echo "-----> Done"
 # echo "-----> Done"
 
 echo "-----> Downloading Plowshare"
-wget -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
+wget -O /tmp/plowshare-2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
 echo "-----> Installing Plowshare"
-tar xvzf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/
+tar xvzf /tmp/plowshare-2.1.7.tar.gz -C $BUILD_DIR/vendor/
 cd $BUILD_DIR/vendor/plowshare-2.1.7
 export PLOWSHARE_FORCE_VERSION="2.1.7"
 make install PREFIX=\$HOME
 PROFILE_PATH="$BUILD_DIR/.profile.d/plowshare.sh"
 mkdir -p "$(dirname "$PROFILE_PATH")"
-echo 'export PATH="$PATH:${HOME}/vendor/plowshare-v2.1.7/OME/bin"' >> $PROFILE_PATH
+echo 'export PATH="$PATH:${HOME}/vendor/plowshare-2.1.7/OME/bin"' >> $PROFILE_PATH
 echo "-----> Done"
 
 cat <<EOF >"$BUILD_DIR"/.profile.d/plowshare_config.sh

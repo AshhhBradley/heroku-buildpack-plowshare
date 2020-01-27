@@ -74,15 +74,26 @@ mkdir -p "$(dirname "$PROFILE_PATH")"
 echo 'export PATH="$PATH:${HOME}/vendor/nodejs/node-v12.14.1-linux-x64/bin"' >> $PROFILE_PATH
 echo "-----> Done"
 
+# echo "-----> Downloading Plowshare"
+# # https://github.com/mcrapet/plowshare/releases
+# wget -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
+# echo "-----> Installing Plowshare"
+# mkdir $BUILD_DIR/vendor/plowshare
+# tar xvzf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/
+# cd $BUILD_DIR/vendor/plowshare-2.1.7
+# ls -l
+# make install PREFIX=\$HOME
+# echo "-----> Done"
+
 echo "-----> Downloading Plowshare"
-# https://github.com/mcrapet/plowshare/releases
 wget -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
 echo "-----> Installing Plowshare"
-mkdir $BUILD_DIR/vendor/plowshare
 tar xvzf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/
 cd $BUILD_DIR/vendor/plowshare-2.1.7
-ls -l
 make install PREFIX=\$HOME
+PROFILE_PATH="$BUILD_DIR/.profile.d/plowshare.sh"
+mkdir -p "$(dirname "$PROFILE_PATH")"
+echo 'export PATH="$PATH:${HOME}/vendor/plowshare-v2.1.7/OME/bin"' >> $PROFILE_PATH
 echo "-----> Done"
 
 cat <<EOF >"$BUILD_DIR"/.profile.d/plowshare_config.sh

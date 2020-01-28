@@ -8,8 +8,6 @@ cd $VENDOR
 echo "-----> Downloading Node.js"
 wget --quiet -P /tmp "https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz"
 echo "-----> Installing Node.js"
-# mkdir $BUILD_DIR/vendor/nodejs
-# tar xJf /tmp/node-v12.14.1-linux-x64.tar.xz -C $BUILD_DIR/vendor/nodejs
 tar xJf /tmp/node-v12.14.1-linux-x64.tar.xz node-v12.14.1-linux-x64/ --strip-components=1 --one-top-level=$VENDOR/nodejs
 PROFILE_PATH="$BUILD_DIR/.profile.d/nodejs.sh"
 mkdir -p "$(dirname "$PROFILE_PATH")"
@@ -40,62 +38,3 @@ cat <<EOF >"$BUILD_DIR"/.profile.d/plowshare_config.sh
 plowmod --install
 export PLOWSHARE_JS="node"
 EOF
-
-# cat <<EOF >$BUILD_DIR/bin/plowinstall
-# # echo "-----> Installing plowshare... "
-# goback=\$(pwd)
-# cd \$HOME/tmp/plowshare-2.1.7
-# make install PREFIX=\$HOME
-# # Install modules
-# plowmod --install
-# cd \$HOME/bin
-# ln -s \$HOME/node/bin/node js
-# cd \$goback
-# EOF
-# chmod 775 $BUILD_DIR/bin/plowinstall
-
-# cat <<EOF >"$BUILD_DIR"/.profile.d/plowshare_config.sh
-# #!/bin/sh
-# cd "\$HOME"
-# if [ -f "vendor/plowmod" ]; then
-#   plowmod --install
-#   export PLOWSHARE_JS="node"
-# else
-#   echo "plowmod does not exist"
-# fi
-
-# wget http://ftp.mozilla.org/pub/spidermonkey/prereleases/59/pre1/mozjs-59.0a1.0.tar.bz2
-# tar xvf mozjs-59.0a1.0.tar.bz2
-# cd mozjs-59.0a1.0.tar.bz2
-
-# BUILD_DIR=$1
-# VENDOR="$BUILD_DIR/vendor"
-# cd ~
-# wget -P /tmp http://ftp.mozilla.org/pub/spidermonkey/prereleases/59/pre1/mozjs-59.0a1.0.tar.bz2
-# echo "-----> Extracting mozjs"
-# tar xf /tmp/mozjs-59.0a1.0.tar.bz2 -C $VENDOR
-# echo "-----> Done"
-# ls -l $VENDOR
-# cd $VENDOR/mozjs-59.0a1.0
-
-# wget -O bootstrap.py https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py && python bootstrap.py
-# wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
-# tar -xvzf /tmp/autoconf-2.13.tar.gz
-# cd autoconf-2.13/
-# ./configure --program-suffix=2.13
-# make
-# make install
-# cd ..
-
-# cd js/src
-# # If it doesn't work, use autoconf2.13
-# autoconf-2.13
-
-# mkdir build_DBG.OBJ
-# cd build_DBG.OBJ
-
-# CFLAGS='-pg' CXXFLAGS='-pg' ../configure --enable-debug --disable-optimize
-# make
-
-# cd js/src/shell/
-# ./js -e 'print("Test JS Interpreter")'

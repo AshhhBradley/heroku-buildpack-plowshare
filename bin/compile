@@ -1,99 +1,25 @@
 #!/bin/sh
 
-echo "-----> Installing Plowshare"
 BUILD_DIR=$1
 VENDOR="$BUILD_DIR/vendor"
 mkdir -p $VENDOR
 cd $VENDOR
 
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/core.sh"
-# curl -O --silent $DOWNLOAD_URL
-# chmod +x core.sh
-
-
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/delete.sh"
-# curl -O --silent $DOWNLOAD_URL
-# mv delete.sh plowdel
-# chmod +x plowdel
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowdel.sh"
-# echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
-
-
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/download.sh"
-# curl -O --silent $DOWNLOAD_URL
-# mv download.sh plowdown
-# chmod +x plowdown
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowdown.sh"
-# echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
-
-
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/list.sh"
-# curl -O --silent $DOWNLOAD_URL 
-# mv list.sh plowlist
-# chmod +x plowlist
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowlist.sh"
-# echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
-
-
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/mod.sh"
-# curl -O --silent $DOWNLOAD_URL
-# mv mod.sh plowmod
-# chmod +x plowmod
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowmod.sh"
-# echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
-
-
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/probe.sh"
-# curl -O --silent $DOWNLOAD_URL
-# mv probe.sh plowprobe
-# chmod +x plowprobe
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowprobe.sh"
-# echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
-
-
-# DOWNLOAD_URL="https://raw.githubusercontent.com/self10/plowshare/master/src/upload.sh"
-# curl -O --silent $DOWNLOAD_URL
-# mv upload.sh plowup
-# chmod +x plowup
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowup.sh"
-# echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
-
-
-# bash plowmod --install
-
-# DOWNLOAD_URL="https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz"
-# wget -P /tmp $DOWNLOAD_URL
-
 echo "-----> Downloading Node.js"
 wget --quiet -P /tmp "https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz"
 echo "-----> Installing Node.js"
-mkdir $BUILD_DIR/vendor/nodejs
-tar xJf /tmp/node-v12.14.1-linux-x64.tar.xz -C $BUILD_DIR/vendor/nodejs
+# mkdir $BUILD_DIR/vendor/nodejs
+# tar xJf /tmp/node-v12.14.1-linux-x64.tar.xz -C $BUILD_DIR/vendor/nodejs
+tar xJf /tmp/node-v12.14.1-linux-x64.tar.xz node-v12.14.1-linux-x64/ --strip-components=1 --one-top-level=$VENDOR/nodejs
 PROFILE_PATH="$BUILD_DIR/.profile.d/nodejs.sh"
 mkdir -p "$(dirname "$PROFILE_PATH")"
-echo 'export PATH="$PATH:${HOME}/vendor/nodejs/node-v12.14.1-linux-x64/bin"' >> $PROFILE_PATH
+echo 'export PATH="$PATH:${HOME}/vendor/nodejs/bin"' >> $PROFILE_PATH
 echo "-----> Done"
-
-# echo "-----> Downloading Plowshare"
-# # https://github.com/mcrapet/plowshare/releases
-# wget -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
-# echo "-----> Installing Plowshare"
-# mkdir $BUILD_DIR/vendor/plowshare
-# tar xvzf /tmp/plowshare-v2.1.7.tar.gz -C $BUILD_DIR/vendor/
-# cd $BUILD_DIR/vendor/plowshare-2.1.7
-# ls -l
-# make install PREFIX=\$HOME
-# echo "-----> Done"
-
-# echo "-----> Downloading Plowshare"
-# wget -O /tmp/plowshare-2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
-# echo "-----> Installing Plowshare"
-# tar xvzf /tmp/plowshare-2.1.7.tar.gz -C $BUILD_DIR/vendor/
 
 echo "-----> Downloading Plowshare"
 wget --quiet -O /tmp/plowshare-v2.1.7.tar.gz "https://github.com/mcrapet/plowshare/archive/v2.1.7.tar.gz"
 echo "-----> Installing Plowshare"
-tar xzf /tmp/plowshare-v2.1.7.tar.gz plowshare-2.1.7/src/ --strip-components=2 --one-top-level=$BUILD_DIR/vendor/plowshare
+tar xzf /tmp/plowshare-v2.1.7.tar.gz plowshare-2.1.7/src/ --strip-components=2 --one-top-level=$VENDOR/plowshare
 mv plowshare/mod.sh plowshare/plowmod
 mv plowshare/upload.sh plowshare/plowup
 mv plowshare/download.sh plowshare/plowdown
@@ -107,15 +33,7 @@ do
 	PROFILE_PATH="$BUILD_DIR/.profile.d/${file#*/}.sh"
 	echo 'export PATH="$PATH:${HOME}/vendor/plowshare"' >> $PROFILE_PATH
 done
-
-
-# cd $BUILD_DIR/vendor/plowshare-2.1.7
-# export PLOWSHARE_FORCE_VERSION="2.1.7"
-# make install PREFIX="install"
-# PROFILE_PATH="$BUILD_DIR/.profile.d/plowshare.sh"
-# mkdir -p "$(dirname "$PROFILE_PATH")"
-# echo 'export PATH="$PATH:${HOME}/vendor/plowshare-2.1.7/install/bin"' >> $PROFILE_PATH
-# echo "-----> Done"
+echo "-----> Done"
 
 cat <<EOF >"$BUILD_DIR"/.profile.d/plowshare_config.sh
 #!/bin/sh
